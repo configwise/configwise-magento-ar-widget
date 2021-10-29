@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:helloworld:Magento_Widget:etc/widget.xsd">
+	<widget class="ConfigWise\ArWidget\Block\Widget\Posts" id="configwise_arwidget_id">
+		<label>ConfigWise ArWidget</label>
+		<description>ConfigWise ArWidget</description>
+		<parameters>
+			<parameter name="posts" sort_order="10" visible="true" xsi:type="text">
+				<label>ConfigWise ArWidget</label>
+			</parameter>
+			 <parameter name="custom_template" xsi:type="text" visible="true" sort_order="80" >
+                <label translate="true">Custom Template</label>
+                <description translate="true"><![CDATA[
+                    Leave blank to use default template <em>ConfigWise_ArWidget::widget/posts.phtml</em>.<br/>
+                ]]></description>
+            </parameter>
+		</parameters>
+	</widget>
+</widgets>
