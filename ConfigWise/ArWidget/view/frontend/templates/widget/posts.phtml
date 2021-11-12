@@ -15,57 +15,16 @@ if ($helper->isEnabled()) {
 		$productcustomid = $_product->getProductCustomId();
 		$purl = "https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=".$productcustomid."&channel_id=".$productchannalId."&domain=".$productDomain."&company_reference_number=".$productReffNumber;
 	 ?>
-		<div class="custom-widget-block"><script type="text/javascript" src="<?php echo $purl; ?>"></script><div>
+		<div style="height: 400px; width: 600px;"><script type="text/javascript" src="<?php echo $purl; ?>"></script></div>
 	<?php  }
-	if ($_product->getProductAttributeUse() == 2) {
+	else {
 		$channalId = $helper->getChannelId();  
 		$Domain = $helper->getDomain();  
 		$ReffNumber = $helper->getReffNumber();  
-		$Attributelist = $helper->getAttributelist();		
-		$productatt = $_product->getData($Attributelist);
-		
+		$Attributelist = $helper->getAttributelist(); 
+		$productatt = $_product->getSku();
 		$url = "https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=".$productatt."&channel_id=".$channalId."&domain=".$Domain."&company_reference_number=".$ReffNumber;
 	 ?>
-		<div class="custom-widget-block"><script type="text/javascript" src="<?php echo $url; ?>"></script><div>
+		<div style="height: 400px; width: 600px;"><script type="text/javascript" src="<?php echo $url; ?>"></script></div>
 	<?php }
  } ?>
-
-<style type="text/css">
-	.catalog-product-view .custom-widget-block{
-		display: inline-block;
-	    width: 100%;
-	    text-align: left;
-	    height: 500px;
-	}	
-	.catalog-product-view .product.info.detailed{
-		display: inline-block;
-		width: 100%;
-	}
-	.custom-widget-block .config-wise-web-canvas-container{
-		/*height: auto;
-		margin-bottom: 20px;*/
-	}
-	@media only screen and (min-width:992px){
- 		.catalog-product-view .product-info-main .page-title-wrapper h1{
- 			font-size: 30px;
- 		}
- 		.catalog-product-view .custom-widget-block .config-wise-web-canvas-container__thumbnail {
-		    background-size: cover;
-		    background-position: 4px -50px;
-		}
-	}
-	@media only screen and (max-width:991px){
-		.catalog-product-view .product-info-main .page-title-wrapper h1{
- 			font-size: 18px;
- 		}
-	}
-	@media only screen and (max-width:767px){
-		body.catalog-product-view .custom-widget-block{
-			height: auto;
-		}
-		.custom-widget-block .config-wise-web-canvas-container__thumbnail{
-
-		}
-
-	}
-</style>
