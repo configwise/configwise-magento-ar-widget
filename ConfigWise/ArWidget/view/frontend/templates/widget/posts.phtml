@@ -3,28 +3,65 @@
 <?php
 $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 $_product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');//get current product
-?>
-
-<?php 
-if ($helper->isEnabled()) {
-	if ($_product->getProductAttributeUse() == 1) {
+if ($_product->getProductAttributeUse() == 1) {
 
 		$productchannalId = $_product->getChannelId();  
 		$productDomain = $_product->getDomain();  
 		$productReffNumber = $_product->getCompanyReferenceNumber();  
 		$productcustomid = $_product->getProductCustomId();
 		$purl = "https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=".$productcustomid."&channel_id=".$productchannalId."&domain=".$productDomain."&company_reference_number=".$productReffNumber;
-	 ?>
-		<div style="height: 400px; width: 600px;"><script type="text/javascript" src="<?php echo $purl; ?>"></script></div>
-	<?php  }
+ }
 	else {
 		$channalId = $helper->getChannelId();  
 		$Domain = $helper->getDomain();  
 		$ReffNumber = $helper->getReffNumber();  
 		$Attributelist = $helper->getAttributelist(); 
 		$productatt = $_product->getSku();
-		$url = "https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=".$productatt."&channel_id=".$channalId."&domain=".$Domain."&company_reference_number=".$ReffNumber;
-	 ?>
-		<div style="height: 400px; width: 600px;"><script type="text/javascript" src="<?php echo $url; ?>"></script></div>
-	<?php }
+		$purl = "https://ar.configwise.io/configwise/canvas/web-viewer.js?product_id=".$productatt."&channel_id=".$channalId."&domain=".$Domain."&company_reference_number=".$ReffNumber;
  } ?>
+
+<?php 
+
+$render_widgetcheck = false;
+
+if( $_product->getProductAttributeUse() == NULL || $_product->getProductAttributeUse() == ''){
+
+	if($helper->getdefaultbehaviour()){
+		if($helper->isEnabled()){
+			$render_widgetcheck = true;
+		}
+		else{
+			$render_widgetcheck = false;
+		}
+	}
+	else{
+		$render_widgetcheck = false;
+	}
+
+}
+else {
+	
+	if($_product->getProductAttributeUse() == 2){
+		
+		if($helper->isEnabled()){
+			$render_widgetcheck = true;
+		}
+		else{
+			$render_widgetcheck = false;
+		}
+		
+	}else if($_product->getProductAttributeUse() == 1){
+	
+		$render_widgetcheck = true;
+	}
+	else{
+
+		$render_widgetcheck = false;
+	}
+}
+
+if($render_widgetcheck){
+	echo '<div style="height: 400px; width: 600px;"><script type="text/javascript" src="'. $purl.'"></script></div>';
+}
+
+

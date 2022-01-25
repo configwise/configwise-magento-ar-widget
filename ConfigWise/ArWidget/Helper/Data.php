@@ -14,7 +14,7 @@ class Data extends AbstractHelper
     const CONFIGWISE_ARWIDGET_CHANNEL_ID = 'arwidget/general/channel_id';
     const CONFIGWISE_ARWIDGET_DOMAIN = 'arwidget/general/domain';
     const CONFIGWISE_ARWIDGET_COMPANY_REF_NUMBER = 'arwidget/general/company_reference_number';
-	
+	const CONFIGWISE_ARWIDGET_DEFAULTBEHAVIOUR = 'arwidget/general/defaultbehaviour';
 	
     protected $_modelStoreManagerInterface;
 	protected $_frameworkRegistry;
@@ -70,6 +70,11 @@ class Data extends AbstractHelper
     public function getReffNumber()
     {
         return $this->scopeConfig->getValue(self::CONFIGWISE_ARWIDGET_COMPANY_REF_NUMBER, ScopeInterface::SCOPE_STORE); 
+    }
+    public function getdefaultbehaviour()
+    {
+      
+        return $this->scopeConfig->getValue(self::CONFIGWISE_ARWIDGET_DEFAULTBEHAVIOUR, ScopeInterface::SCOPE_STORE); 
     }
 
 }

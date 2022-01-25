@@ -35,6 +35,12 @@
                     <depends><field id="enable">1</field></depends>
                     <comment><![CDATA[Enter Company reference number]]></comment>
                 </field>
+                <!-- Codi  -->
+                <field id="defaultbehaviour" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Behaviour</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <!-- COdi End -->
             </group> 
         </section>
     </system>
