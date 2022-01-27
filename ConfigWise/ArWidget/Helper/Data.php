@@ -73,7 +73,6 @@ class Data extends AbstractHelper
     }
     public function getdefaultbehaviour()
     {
-      
         return $this->scopeConfig->getValue(self::CONFIGWISE_ARWIDGET_DEFAULTBEHAVIOUR, ScopeInterface::SCOPE_STORE); 
     }
 
