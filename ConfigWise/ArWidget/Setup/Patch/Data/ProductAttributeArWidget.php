@@ -1,30 +1,54 @@
 <?php
-namespace ConfigWise\ArWidget\Setup;
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
 
+namespace ConfigWise\ArWidget\Setup\Patch\Data;
+
+use Magento\Framework\Setup\ModuleDataSetupInterface;
+use Magento\Framework\Setup\Patch\DataPatchInterface;
 use Magento\Eav\Setup\EavSetup;
 use Magento\Eav\Setup\EavSetupFactory;
 use Magento\Framework\Setup\InstallDataInterface;
 use Magento\Framework\Setup\ModuleContextInterface;
-use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Eav\Model\Entity\Attribute\ScopedAttributeInterface;
- 
-class InstallData implements InstallDataInterface
+
+
+/**
+* Patch is mechanism, that allows to do atomic upgrade data changes
+*/
+class ProductAttributeArWidget implements DataPatchInterface
 {
-    
+    /**
+     * @var ModuleDataSetupInterface $moduleDataSetup
+     */
+    private $moduleDataSetup;
+    /**
+     * @var EavSetupFactory
+     */
     private $eavSetupFactory;
- 
-    public function __construct(EavSetupFactory $eavSetupFactory)
+
+    /**
+     * @param ModuleDataSetupInterface $moduleDataSetup
+     */
+    public function __construct(ModuleDataSetupInterface $moduleDataSetup, EavSetupFactory $eavSetupFactory)
     {
+        $this->moduleDataSetup = $moduleDataSetup;
         $this->eavSetupFactory = $eavSetupFactory;
     }
- 
 
-    public function install(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
+    /**
+     * Do Upgrade
+     *
+     * @return void
+     */
+    public function apply()
     {
-        
-        $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
- 
-        $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'product_attribute_use');
+		  $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
+			
+		  $eavSetup->removeAttribute(\Magento\Catalog\Model\Product::ENTITY, 'product_attribute_use');
         
         $statusOptions = 'ConfigWise\ArWidget\Model\Config\Source\StatusOptions';
         $eavSetup->addAttribute(
@@ -155,5 +179,21 @@ class InstallData implements InstallDataInterface
             ]
         );
  
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAliases()
+    {
+        return [];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getDependencies()
+    {
+        return [];
     }
 }

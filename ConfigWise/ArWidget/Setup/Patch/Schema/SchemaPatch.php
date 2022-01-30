@@ -5,15 +5,15 @@
  */
 declare(strict_types=1);
 
-namespace ConfigWise\ArWidget\Setup\Patch\Data;
+namespace ConfigWise\ArWidget\Setup\Patch\Schema;
 
 use Magento\Framework\Setup\ModuleDataSetupInterface;
-use Magento\Framework\Setup\Patch\DataPatchInterface;
+use Magento\Framework\Setup\Patch\SchemaPatchInterface;
 
 /**
 * Patch is mechanism, that allows to do atomic upgrade data changes
 */
-class patch implements DataPatchInterface
+class SchemaPatch implements SchemaPatchInterface
 {
     /**
      * @var ModuleDataSetupInterface $moduleDataSetup
